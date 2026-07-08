@@ -58,7 +58,7 @@ one-time sign-in and retry.
 ## Tools the server exposes
 
 All tools are prefixed `bt_`. Reads are scoped to your role and workspace; writes are additive and
-rate-limited; destructive operations require explicit confirmation (see SECURITY.md).
+rate-limited; destructive operations require explicit confirmation (see https://basethread.ai/security).
 
 **Read / recall**
 - `bt_workspace` , the workspace, your containers, your role, and behavior directives (call first).
@@ -88,7 +88,7 @@ rate-limited; destructive operations require explicit confirmation (see SECURITY
 
 No destructive action runs without user confirmation. Reads never exceed what you can see in the web app,
 writes are additive and logged, and one team's context is isolated from another's. Full details:
-[SECURITY.md](./SECURITY.md).
+[basethread.ai/security](https://basethread.ai/security).
 
 ## Local (Mac desktop) alternative
 

@@ -23,7 +23,8 @@ for every client, plus the tool list: **[llms-install.md](./llms-install.md)**.
 
 - **[server.json](./server.json)** , the Official MCP Registry manifest (`ai.basethread/basethread`).
 - **[llms-install.md](./llms-install.md)** , agent-readable install + configuration guide.
-- **[SECURITY.md](./SECURITY.md)** , security, permissions, auth, and tenancy.
+- **[Security & privacy](https://basethread.ai/security)** , the canonical security page (access model,
+  OAuth, tenancy). Mirrored in [SECURITY.md](./SECURITY.md).
 - **[PUBLISHING.md](./PUBLISHING.md)** , how the registry listing is published and republished.
 
 ## Links
