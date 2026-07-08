@@ -1,0 +1,36 @@
+name: Publish to MCP Registry
+
+# Republishes the listing on a version tag. The Official MCP Registry is in
+# preview and can reset its data, so this is our safety net for staying live.
+# Requires the repo secret MCP_PRIVATE_KEY (the Ed25519 hex seed; see PUBLISHING.md).
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mcp-publisher
+        run: |
+          # Pin/verify the release against the live registry docs at run time;
+          # the tooling is in preview. This fetches the latest linux build.
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" \
+            | tar -xz mcp-publisher
+          sudo mv mcp-publisher /usr/local/bin/
+
+      - name: Authenticate (DNS) and publish
+        env:
+          MCP_PRIVATE_KEY: ${{ secrets.MCP_PRIVATE_KEY }}
+        run: |
+          if [ -z "$MCP_PRIVATE_KEY" ]; then
+            echo "MCP_PRIVATE_KEY secret is not set; cannot publish." >&2
+            exit 1
+          fi
+          mcp-publisher login dns --domain basethread.ai --private-key "$MCP_PRIVATE_KEY"
+          mcp-publisher publish
